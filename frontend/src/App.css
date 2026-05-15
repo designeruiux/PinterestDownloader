@@ -1,0 +1,239 @@
+@import "tailwindcss";
+
+
+body{
+  overflow-x: hidden;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 25px;
+
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+  font-family: Arial, sans-serif;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* LEFT & RIGHT */
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+/* LOGO */
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 25px;
+  color: #ffffff; /* FIX: white for gradient */
+  letter-spacing: 0.5px;
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ITEMS */
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 16px;
+
+  color: rgba(255, 255, 255, 0.9); /* FIX: readable on gradient */
+
+  transition: all 0.25s ease;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* HOVER */
+.nav-links li:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ICON COLOR (if using react-icons inside) */
+.nav-links li svg {
+  color: #fff;
+}
+
+
+
+/* Home page css  */
+/* PAGE BACKGROUND */
+.home-wrapper {
+  min-height: 100vh;
+  background: #ecf0f1; /* REQUIRED */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 15px;
+}
+
+/* CARD */
+.home-card {
+  width: 100%;
+  max-width: 650px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #e60023;
+  margin-bottom: 25px;
+}
+
+/* INPUT BOX */
+.input-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+/* INPUT */
+.input-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+}
+
+/* ICONS */
+.input-icon {
+  color: #e60023;
+  font-size: 16px;
+}
+
+.copy-icon {
+  color: #888;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.copy-icon:hover {
+  color: #e60023;
+}
+
+/* BUTTON */
+.input-box button {
+  background: #e60023;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.input-box button:hover {
+  background: #c4001d;
+}
+
+/* MEDIA BOX */
+.media-box {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.media-box video,
+.media-box img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+}
+
+/* DOWNLOAD BUTTON */
+.media-box button {
+  margin-top: 15px;
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.media-box button:hover {
+  background: #27ae60;
+}
+
+
+.discover-item {
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 18px;
+  color: #374151;
+}
+
+.discover-item:hover {
+  background: #f9fafb;
+  padding-left: 28px;
+  color: #e60023;
+}
+
+.arrow {
+  font-size: 30px;
+  color: #9ca3af;
+  transition: 0.25s ease;
+}
+
+.discover-item:hover .arrow {
+  color: #e60023;
+  transform: translateX(3px);
+}
+
+
+
+
+.discover-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 18px;
+  font-size:15px;
+  color:#222;
+  transition:0.2s;
+  cursor:pointer;
+}
+
+.discover-row:hover{
+  background:#f7f7f7;
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}

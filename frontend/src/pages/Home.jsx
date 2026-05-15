@@ -12,9 +12,14 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
-  const handleDownload = async () => {
+const handleDownload = async () => {
   if (!url) {
     toast.error("Please Enter Pinterest URL");
+    return;
+  }
+
+  if (!baseUrl) {
+    toast.error("API URL missing");
     return;
   }
 
@@ -25,23 +30,25 @@ function Home() {
       `${baseUrl}/download?url=${encodeURIComponent(url)}`
     );
 
+    if (!response.ok) {
+      throw new Error(`Server Error: ${response.status}`);
+    }
+
     const data = await response.json();
 
     if (data.success) {
-
       navigate("/download", {
         state: {
           video: data.video || "",
           image: data.image || "",
         },
       });
-
     } else {
       toast.error(data.message || "Media not found");
     }
   } catch (err) {
     console.log(err);
-    toast.error("Backend error");
+    toast.error(err.message || "Backend error");
   } finally {
     setLoading(false);
   }

@@ -1,13 +1,15 @@
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 
+let browser;
+
 export const homeController = (req, res) => {
   res.send("Pinterest Downloader API Running...");
 };
 
 export const downloadController = async (req, res) => {
 
-  let browser;
+  let page;
 
   try {
 
@@ -20,54 +22,62 @@ export const downloadController = async (req, res) => {
       });
     }
 
-browser = await puppeteer.launch({
-  args: chromium.args,
-  defaultViewport: chromium.defaultViewport,
-  executablePath: await chromium.executablePath(),
-  headless: true,
-});
+    if (!browser) {
+      browser = await puppeteer.launch({
+        args: [
+          ...chromium.args,
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-dev-shm-usage",
+          "--single-process",
+          "--no-zygote",
+          "--disable-gpu",
+        ],
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: true,
+      });
+    }
 
-const page = await browser.newPage();
+    page = await browser.newPage();
 
-await page.setUserAgent(
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-);
+    await page.setRequestInterception(true);
 
-    // await page.setUserAgent(
-    //   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-    // );
+    // FIX: avoid duplicate listeners
+    
+
+    page.on("request", (req) => {
+
+      const type = req.resourceType();
+
+      if (
+        type === "image" ||
+        type === "font" ||
+        type === "stylesheet"
+      ) {
+        req.abort();
+      } else {
+        req.continue();
+      }
+    });
+
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+    );
 
     await page.goto(url, {
       waitUntil: "domcontentloaded",
-      timeout: 30000,
-    });
-    await new Promise((r) => setTimeout(r, 1500));
-
-
-    await page.evaluate(() => {
-      window.scrollBy(0, window.innerHeight);
+      timeout: 15000,
     });
 
+    const videoUrl = await page.evaluate(() => {
 
+      const video =
+        document.querySelector("video") ||
+        document.querySelector("source");
 
-    const html = await page.content();
-
-    let videoUrl = "";
-
-    const matches =
-      html.match(
-        /https:\/\/v1\.pinimg\.com\/videos\/[^"]+\.mp4/g
-      ) ||
-      html.match(
-        /https:\/\/v\.pinimg\.com\/[^"]+\.mp4/g
-      );
-
-    if (matches && matches.length > 0) {
-
-      videoUrl = matches[0];
-
-      videoUrl = videoUrl.split('"')[0];
-    }
+      return video ? video.src : "";
+    });
 
     const image = await page.evaluate(() => {
 
@@ -75,12 +85,10 @@ await page.setUserAgent(
         'meta[property="og:image"]'
       );
 
-      return ogImage
-        ? ogImage.content
-        : "";
+      return ogImage ? ogImage.content : "";
     });
 
-    await browser.close();
+    await page.close();
 
     res.json({
       success: true,
@@ -90,13 +98,11 @@ await page.setUserAgent(
 
   } catch (error) {
 
-    if (browser) {
-      await browser.close();
-    }
+    console.log("ERROR:", error);
 
-    console.log(error);
+    if (page) await page.close();
 
-    res.json({
+    res.status(500).json({
       success: false,
       error: error.message,
     });
@@ -109,8 +115,11 @@ export const proxyController = async (req, res) => {
 
     const url = req.query.url;
 
-    if (!url) {
-      return res.status(400).send("URL missing");
+    if (!url.includes("pinterest.com")) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid Pinterest URL",
+      });
     }
 
     const response = await fetch(url, {
@@ -129,13 +138,9 @@ export const proxyController = async (req, res) => {
 
     let extension = "file";
 
-    if (contentType.includes("mp4")) {
-      extension = "mp4";
-    } else if (contentType.includes("jpeg")) {
-      extension = "jpg";
-    } else if (contentType.includes("png")) {
-      extension = "png";
-    }
+    if (contentType.includes("mp4")) extension = "mp4";
+    else if (contentType.includes("jpeg")) extension = "jpg";
+    else if (contentType.includes("png")) extension = "png";
 
     res.setHeader(
       "Content-Disposition",

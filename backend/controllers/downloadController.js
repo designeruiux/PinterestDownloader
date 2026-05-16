@@ -1,4 +1,5 @@
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 
 export const homeController = (req, res) => {
   res.send("Pinterest Downloader API Running...");
@@ -19,12 +20,11 @@ export const downloadController = async (req, res) => {
       });
     }
 
- browser = await puppeteer.launch({
-  headless: "new",
-  args: [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-  ],
+browser = await puppeteer.launch({
+  args: chromium.args,
+  defaultViewport: chromium.defaultViewport,
+  executablePath: await chromium.executablePath(),
+  headless: true,
 });
 
 const page = await browser.newPage();

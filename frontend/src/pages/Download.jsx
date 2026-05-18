@@ -43,7 +43,7 @@ const downloadFile = async (fileUrl) => {
 
     const elapsed = Date.now() - startTime;
 
-    const minimumTime = 1000;
+    const minimumTime = 3000;
 
     if (elapsed < minimumTime) {
       await new Promise((resolve) =>

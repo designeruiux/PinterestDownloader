@@ -26,48 +26,43 @@ const downloadFile = async (fileUrl) => {
 
   const interval = setInterval(() => {
     current += 1;
-    if (current <= 100) setProgress(current);
+
+    if (current <= 100) {
+      setProgress(current);
+    }
   }, 30);
 
   try {
-    const proxyUrl = `${baseUrl}/proxy?url=${encodeURIComponent(fileUrl)}`;
+    const proxyUrl =
+      `${baseUrl}/proxy?url=${encodeURIComponent(fileUrl)}`;
+
+    const startTime = Date.now();
 
     const response = await fetch(proxyUrl);
-
-   
-    const contentType = response.headers.get("content-type");
-
-    if (!response.ok || !contentType || contentType.includes("text/html")) {
-      throw new Error("Invalid media response (HTML detected)");
-    }
-
     const blob = await response.blob();
 
-    if (blob.type.includes("text/html")) {
-      throw new Error("HTML file received instead of media");
-    }
+    const elapsed = Date.now() - startTime;
 
-    const elapsed = Date.now();
+    const minimumTime = 3000;
+
+    if (elapsed < minimumTime) {
+      await new Promise((resolve) =>
+        setTimeout(resolve, minimumTime - elapsed)
+      );
+    }
 
     const blobUrl = window.URL.createObjectURL(blob);
 
     const link = document.createElement("a");
     link.href = blobUrl;
-
-    // proper extension handling
-    const extension = contentType.includes("video")
-      ? "mp4"
-      : contentType.includes("image")
-      ? "jpg"
-      : "file";
-
-    link.setAttribute("download", `pinterest.${extension}`);
+    link.setAttribute("download", "pinterest-media");
 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 
     clearInterval(interval);
+
     setProgress(100);
 
     setTimeout(() => {
@@ -79,6 +74,7 @@ const downloadFile = async (fileUrl) => {
     console.error("Download failed:", error);
 
     clearInterval(interval);
+
     setDownloading(false);
     setCompleted(false);
     setProgress(0);

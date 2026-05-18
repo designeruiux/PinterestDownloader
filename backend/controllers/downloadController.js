@@ -124,10 +124,15 @@ export const proxyController = async (req, res) => {
   try {
 
     const url = req.query.url;
-
-   if (!url || !url.includes("pinterest.com")) {
-      return res.status(400).send("URL missing");
-    }
+if (
+  !url ||
+  (
+    !url.includes("pinimg.com") &&
+    !url.includes("pinterest.com")
+  )
+) {
+  return res.status(400).send("Invalid URL");
+}
 
     const response = await fetch(url, {
       headers: {

@@ -55,7 +55,10 @@ const downloadFile = async (fileUrl) => {
 
     const link = document.createElement("a");
     link.href = blobUrl;
-    link.setAttribute("download", "pinterest-media");
+    link.setAttribute(
+  "download",
+  video ? "pinterest-video.mp4" : "pinterest-image.jpg"
+);
 
     document.body.appendChild(link);
     link.click();

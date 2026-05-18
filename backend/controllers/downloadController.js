@@ -84,7 +84,9 @@ export const downloadController = async (req, res) => {
 
       videoUrl = videoUrl.split('"')[0];
     }
-
+if (!videoUrl || !videoUrl.startsWith("http")) {
+  videoUrl = "";
+}
     const image = await page.evaluate(() => {
 
       const ogImage = document.querySelector(
@@ -120,38 +122,31 @@ export const downloadController = async (req, res) => {
 };
 
 export const proxyController = async (req, res) => {
-
   try {
-
     const url = req.query.url;
 
-   if (!url || !url.includes("pinterest.com")) {
-      return res.status(400).send("URL missing");
+    if (!url || !url.includes("pinterest.com")) {
+      return res.status(400).send("Invalid URL");
     }
 
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "Mozilla/5.0"
-      }
+        "User-Agent": "Mozilla/5.0",
+      },
     });
 
-    if (!response.ok) {
-      return res.status(500).send("Download failed");
-    }
+    const contentType = response.headers.get("content-type") || "";
 
-    const contentType =
-      response.headers.get("content-type") ||
-      "application/octet-stream";
+    
+    if (!response.ok || contentType.includes("text/html")) {
+      return res.status(400).send("Not a valid media file");
+    }
 
     let extension = "file";
 
-    if (contentType.includes("mp4")) {
-      extension = "mp4";
-    } else if (contentType.includes("jpeg")) {
-      extension = "jpg";
-    } else if (contentType.includes("png")) {
-      extension = "png";
-    }
+    if (contentType.includes("mp4")) extension = "mp4";
+    else if (contentType.includes("jpeg")) extension = "jpg";
+    else if (contentType.includes("png")) extension = "png";
 
     res.setHeader(
       "Content-Disposition",
@@ -161,13 +156,10 @@ export const proxyController = async (req, res) => {
     res.setHeader("Content-Type", contentType);
 
     const buffer = await response.arrayBuffer();
-
     res.send(Buffer.from(buffer));
 
   } catch (err) {
-
     console.log(err);
-
     res.status(500).send("Download failed");
   }
 };

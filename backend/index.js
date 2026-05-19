@@ -9,6 +9,9 @@ dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 
+/* =========================
+   CORS CONFIG
+========================= */
 app.use(cors({
   origin: [
     process.env.CLIENT_URL,
@@ -16,18 +19,31 @@ app.use(cors({
   ]
 }));
 
-app.use("/", downloadRoutes);
+app.use(express.json());
 
-// 👉 serve frontend
+/* =========================
+   API ROUTES
+========================= */
+app.use("/api", downloadRoutes);
+
+/* =========================
+   SERVE REACT FRONTEND
+========================= */
 app.use(express.static(path.join(__dirname, "dist")));
 
-// 👉 SPA fallback
-app.get("*", (req, res) => {
+/* =========================
+   SPA FALLBACK (FIX FOR REFRESH 404)
+   ⚠️ IMPORTANT: NO "*" (Node 24 safe version)
+========================= */
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
+/* =========================
+   START SERVER
+========================= */
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

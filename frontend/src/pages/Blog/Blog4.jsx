@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Blog4() {
   return (
     <div className="min-h-screen bg-[#ecf0f1] flex justify-center px-4 py-10">
@@ -10,7 +10,7 @@ function Blog4() {
           On-Site Success: Saving Pinterest DIY Videos for the Job
         </h1>
 
-        <p className="text-sm text-gray-500 text-center mb-8">
+        <p className="text-sm text-gray-500 text-center mb-6">
           By Klickpin Team • Category: DIY • Read time: ~2 min
         </p>
 
@@ -81,7 +81,23 @@ function Blog4() {
           stays available even if your internet connection disappears or the
           power needs to be switched off during repairs.
         </p>
-
+       <div className="mt-12 border-t border-gray-300 pt-6 flex justify-between items-center gap-4">
+              
+                        <Link
+                          to="/blog/Study Smarter: Using Pinterest Videos for Deep Focus"
+                          className="bg-gray-100 hover:bg-gray-200 px-5 py-3 rounded-lg text-sm font-medium transition"
+                        >
+                          ← Previous Blog
+                        </Link>
+              
+                        <Link
+                          to="/blog/Beyond the Download: Building Your Personal Reference Library"
+                          className="bg-black text-white hover:bg-gray-800 px-5 py-3 rounded-lg text-sm font-medium transition"
+                        >
+                          Next Blog →
+                        </Link>
+              
+                      </div>
       </div>
 
     </div>

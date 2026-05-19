@@ -18,6 +18,10 @@ import Blog4 from "./pages/Blog/Blog4.jsx";
 import Blog5 from "./pages/Blog/Blog5.jsx";
 import Blog6 from "./pages/Blog/Blog6.jsx";
 import SupportedUrls from "./pages/SupportedUrls.jsx";
+import Blog7 from "./pages/Blog/Blog7.jsx";
+import Blog8 from "./pages/Blog/Blog8.jsx";
+import Blog9 from "./pages/Blog/Blog9.jsx";
+import Blog10 from "./pages/Blog/Blog10.jsx";
 
 function App() {
   return (
@@ -45,6 +49,10 @@ function App() {
         <Route path="/blog/On-Site Success: Saving Pinterest DIY Videos for the Job" element={<Blog4 />} />
         <Route path="/blog/Beyond the Download: Building Your Personal Reference Library" element={<Blog5 />} />
         <Route path="/blog/Private Browsing & Pinterest: What Actually Stays Private?" element={<Blog6 />} />
+        <Route path="/blog/Offline Inspiration: Creating Mood Boards Without Internet" element={<Blog7 />} />
+        <Route path="/blog/Weekend Projects Made Easy with Saved Pinterest Tutorials" element={<Blog8 />} />
+        <Route path="/blog/Why Offline Video Learning Beats Endless Scrolling" element={<Blog9 />} />
+        <Route path="/blog/Creative Workflow Tips for Pinterest Content Collectors" element={<Blog10 />} />
 
 
       </Routes>

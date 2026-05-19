@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Blog5() {
   return (
     <div className="min-h-screen bg-[#ecf0f1] flex justify-center px-4 py-10">
@@ -10,7 +10,7 @@ function Blog5() {
           Beyond the Download: Building Your Personal Reference Library
         </h1>
 
-        <p className="text-sm text-gray-500 text-center mb-8">
+        <p className="text-sm text-gray-500 text-center mb-6">
           By Klickpin Team • Category: Productivity • Read time: ~3 min
         </p>
 
@@ -128,7 +128,23 @@ function Blog5() {
           no longer just consuming content — you are actively building a real
           skill.
         </p>
-
+    <div className="mt-12 border-t border-gray-300 pt-6 flex justify-between items-center gap-4">
+            
+                      <Link
+                        to="/blog/On-Site Success: Saving Pinterest DIY Videos for the Job"
+                        className="bg-gray-100 hover:bg-gray-200 px-5 py-3 rounded-lg text-sm font-medium transition"
+                      >
+                        ← Previous Blog
+                      </Link>
+            
+                      <Link
+                        to="/blog/Private Browsing & Pinterest: What Actually Stays Private?"
+                        className="bg-black text-white hover:bg-gray-800 px-5 py-3 rounded-lg text-sm font-medium transition"
+                      >
+                        Next Blog →
+                      </Link>
+            
+                    </div>
       </div>
 
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Blog1() {
   return (
     <div className="min-h-screen bg-[#ecf0f1] flex justify-center px-4 py-10">
@@ -10,7 +10,7 @@ function Blog1() {
           The Digital Handshake: Using Downloaded Content Responsibly
         </h1>
 
-        <p className="text-sm text-gray-500 text-center mb-8">
+        <p className="text-sm text-gray-500 text-center mb-6">
           By Klickpin Team • Category: Basics • Read time: ~3 min
         </p>
 
@@ -88,9 +88,26 @@ function Blog1() {
           forget the human being on the other side of the screen who made it all
           possible.
         </p>
+  <div className="mt-12 border-t border-gray-300 pt-6 flex justify-between items-center gap-4">
+
+          <Link
+            to=""
+            className="bg-gray-100 hover:bg-gray-200 px-5 py-3 rounded-lg text-sm font-medium transition"
+          >
+            ← Previous Blog
+          </Link>
+
+          <Link
+            to="/blog/The Traveler’s Hack: Pinterest for Long Flights and Layovers"
+            className="bg-black text-white hover:bg-gray-800 px-5 py-3 rounded-lg text-sm font-medium transition"
+          >
+            Next Blog →
+          </Link>
+
+        </div>
 
       </div>
-
+        
     </div>
   );
 }

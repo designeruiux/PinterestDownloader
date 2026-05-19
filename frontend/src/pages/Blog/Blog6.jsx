@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Blog6() {
   return (
     <div className="min-h-screen bg-[#ecf0f1] flex justify-center px-4 py-10">
@@ -10,7 +10,7 @@ function Blog6() {
           Private Browsing & Pinterest: What Actually Stays Private?
         </h1>
 
-        <p className="text-sm text-gray-500 text-center mb-8">
+        <p className="text-sm text-gray-500 text-center mb-6">
           By Klickpin Team • Category: Privacy • Read time: ~2 min
         </p>
 
@@ -92,7 +92,23 @@ function Blog6() {
           multiple downloads or organized collection building, regular browsing
           is usually more efficient and easier to manage.
         </p>
-
+          <div className="mt-12 border-t border-gray-300 pt-6 flex justify-between items-center gap-4">
+                  
+                            <Link
+                              to="/blog/Beyond the Download: Building Your Personal Reference Library"
+                              className="bg-gray-100 hover:bg-gray-200 px-5 py-3 rounded-lg text-sm font-medium transition"
+                            >
+                              ← Previous Blog
+                            </Link>
+                  
+                            <Link
+                              to="/blog/Offline Inspiration: Creating Mood Boards Without Internet"
+                              className="bg-black text-white hover:bg-gray-800 px-5 py-3 rounded-lg text-sm font-medium transition"
+                            >
+                              Next Blog →
+                            </Link>
+                  
+                          </div>
       </div>
 
     </div>

@@ -40,6 +40,30 @@ function Blog() {
       path: "/blog/Private Browsing & Pinterest: What Actually Stays Private?",
       image: "https://images.unsplash.com/photo-1526378722484-bd91ca387e72"
     },
+    {
+    title: "Offline Inspiration: Creating Mood Boards Without Internet",
+    desc: "Save Pinterest videos and ideas offline to build creative mood boards anywhere—perfect for designers, students, and creators on the go.",
+    path: "/blog/Offline Inspiration: Creating Mood Boards Without Internet",
+    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72"
+  },
+  {
+    title: "Weekend Projects Made Easy with Saved Pinterest Tutorials",
+    desc: "Download Pinterest tutorials before the weekend and enjoy smooth, distraction-free DIY projects without buffering or ads.",
+    path: "/blog/Weekend Projects Made Easy with Saved Pinterest Tutorials",
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952"
+  },
+  {
+    title: "Why Offline Video Learning Beats Endless Scrolling",
+    desc: "Turn Pinterest videos into focused offline learning sessions by avoiding distractions, recommendations, and constant notifications.",
+    path: "/blog/Why Offline Video Learning Beats Endless Scrolling",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+  },
+  {
+    title: "Creative Workflow Tips for Pinterest Content Collectors",
+    desc: "Organize downloaded Pinterest videos efficiently with folders, categories, and quick-access systems to boost your creative workflow.",
+    path: "/blog/Creative Workflow Tips for Pinterest Content Collectors",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+  }
  
   ];
 

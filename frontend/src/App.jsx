@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import "./App.css";
 import Navbar from "./components/Navbar.jsx";
@@ -21,7 +21,7 @@ import SupportedUrls from "./pages/SupportedUrls.jsx";
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Navbar/>
       <Routes>
       
@@ -49,7 +49,7 @@ function App() {
 
       </Routes>
       <Footer/>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

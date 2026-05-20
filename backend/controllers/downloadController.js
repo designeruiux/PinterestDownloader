@@ -1,5 +1,4 @@
-import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer";
 
 export const homeController = (req, res) => {
   res.send("Pinterest Downloader API Running...");
@@ -20,44 +19,29 @@ export const downloadController = async (req, res) => {
       });
     }
 
-  browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(),
-    headless: true,
-  });
+    browser = await puppeteer.launch({
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+      ],
+    });
 
-  const page = await browser.newPage();
-  await page.setRequestInterception(true);
-
-  page.on("request", (req) => {
-
-    const type = req.resourceType();
-
-    if (
-      type === "image" ||
-      type === "font" ||
-      type === "stylesheet"
-    ) {
-      req.abort();
-    } else {
-      req.continue();
-    }
-  });
-
-  await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-  );
-
-      // await page.setUserAgent(
-      //   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-      // );
-  await page.setDefaultNavigationTimeout(30000);
-      await page.goto(url, {
-        waitUntil: "domcontentloaded",
-        timeout: 30000,
-      });
+    const page = await browser.newPage();
     
+    // const userAgent = await browser.userAgent();
+
+// await page.setUserAgent(userAgent);
+
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+    );
+
+    await page.goto(url, {
+      waitUntil: "domcontentloaded",
+      timeout: 30000,
+    });
+    await new Promise((r) => setTimeout(r, 1500));
 
 
     await page.evaluate(() => {
@@ -124,15 +108,10 @@ export const proxyController = async (req, res) => {
   try {
 
     const url = req.query.url;
-if (
-  !url ||
-  (
-    !url.includes("pinimg.com") &&
-    !url.includes("pinterest.com")
-  )
-) {
-  return res.status(400).send("Invalid URL");
-}
+
+    if (!url) {
+      return res.status(400).send("URL missing");
+    }
 
     const response = await fetch(url, {
       headers: {

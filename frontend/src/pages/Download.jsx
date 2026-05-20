@@ -30,7 +30,7 @@ const downloadFile = async (fileUrl) => {
     if (current <= 100) {
       setProgress(current);
     }
-  }, 30);
+  }, 20);
 
   try {
     const proxyUrl =

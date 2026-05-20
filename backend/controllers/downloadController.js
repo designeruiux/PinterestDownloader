@@ -46,7 +46,7 @@ await page.setRequestInterception(true);
 page.on("request", (req) => {
   const type = req.resourceType();
 
-  if (["image", "font", "stylesheet"].includes(type)) {
+  if (["font", "stylesheet"].includes(type)) {
     req.abort();
   } else {
     req.continue();

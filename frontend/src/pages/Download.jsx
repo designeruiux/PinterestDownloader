@@ -89,7 +89,7 @@ const downloadFile = async (fileUrl) => {
 
       {/* TITLE */}
       <h1 className="text-4xl font-bold text-center text-gray-800">
-        Pinterest Video Downloader
+        pintrestdownloader.net
       </h1>
 
       <p className="text-center text-gray-600 mt-2 text-lg">
@@ -158,7 +158,7 @@ const downloadFile = async (fileUrl) => {
               </div>
 
               <div className="flex items-center justify-between px-6 py-2 discover-item">
-                <span>KlickPin premium features</span>
+                <span>pintrestdownloader.net premium features</span>
                 <span className="arrow">›</span>
               </div>
 

@@ -27,7 +27,7 @@ if (!browser) {
       "--no-sandbox",
       "--disable-setuid-sandbox",
       "--disable-dev-shm-usage",
-       
+       "--single-process",
     "--disable-gpu",
     ],
     executablePath: await chromium.executablePath(),

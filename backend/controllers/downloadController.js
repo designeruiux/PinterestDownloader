@@ -1,13 +1,13 @@
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
-
+let browser;
 export const homeController = (req, res) => {
   res.send("Pinterest Downloader API Running...");
 };
 
 export const downloadController = async (req, res) => {
 
-  let browser;
+  
 
   try {
 
@@ -20,27 +20,46 @@ export const downloadController = async (req, res) => {
       });
     }
 
+if (!browser) {
   browser = await puppeteer.launch({
-  args: chromium.args,
-  executablePath: await chromium.executablePath(),
-  headless: chromium.headless,
-});
+    args: [
+      ...chromium.args,
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
+  });
+}
 
-    const page = await browser.newPage();
-    
-    // const userAgent = await browser.userAgent();
+const page = await browser.newPage();
 
-// await page.setUserAgent(userAgent);
+await page.setUserAgent(
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+);
 
-    await page.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-    );
+// FIX INTERCEPT
+if (!page._interceptEnabled) {
+  await page.setRequestInterception(true);
 
+  page.on("request", (req) => {
+    const type = req.resourceType();
+
+    if (["image", "media", "font"].includes(type)) {
+      req.abort();
+    } else {
+      req.continue();
+    }
+  });
+
+  page._interceptEnabled = true;
+}
     await page.goto(url, {
       waitUntil: "domcontentloaded",
-      timeout: 30000,
+      timeout: 20000,
     });
-    await new Promise((r) => setTimeout(r, 1500));
+    await new Promise((r) => setTimeout(r, 800));
 
 
     await page.evaluate(() => {
@@ -79,13 +98,12 @@ export const downloadController = async (req, res) => {
         : "";
     });
 
-    await browser.close();
-
-    res.json({
-      success: true,
-      image,
-      video: videoUrl,
-    });
+    await page.close();
+   return res.json({
+  success: true,
+  image,
+  video: videoUrl,
+});
 
   } catch (error) {
 

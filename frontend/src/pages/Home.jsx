@@ -13,6 +13,7 @@ function Home() {
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
 const handleDownload = async () => {
+
   if (!url) {
     toast.error("Please Enter Pinterest URL");
     return;
@@ -24,32 +25,59 @@ const handleDownload = async () => {
   }
 
   try {
+
     setLoading(true);
+
+    console.log("REQUEST URL:", `${baseUrl}/download`);
 
     const response = await fetch(
       `${baseUrl}/download?url=${encodeURIComponent(url)}`
     );
 
-    if (!response.ok) {
-      throw new Error(`Server Error: ${response.status}`);
-    }
-
     const data = await response.json();
 
-    if (data.success) {
+    console.log("API RESPONSE:", data);
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.message ||
+        data.error ||
+        `Server Error: ${response.status}`
+      );
+    }
+
+    if (
+      data.success &&
+      (data.video || data.image)
+    ) {
+
       navigate("/download", {
         state: {
           video: data.video || "",
           image: data.image || "",
         },
       });
+
     } else {
-      toast.error(data.message || "Media not found");
+
+      toast.error(
+        data.message ||
+        data.error ||
+        "No media found"
+      );
     }
+
   } catch (err) {
-    console.log(err);
-    toast.error(err.message || "Backend error");
+
+    console.log("FRONTEND ERROR:", err);
+
+    toast.error(
+      err.message || "Backend error"
+    );
+
   } finally {
+
     setLoading(false);
   }
 };

@@ -10,8 +10,6 @@ function Home() {
   const [video, setVideo] = useState("");
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // NEW PROGRESS STATE
   const [progress, setProgress] = useState(0);
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -33,13 +31,12 @@ function Home() {
       setLoading(true);
       setProgress(0);
 
-      // FAKE PROGRESS
       let current = 0;
 
       const interval = setInterval(() => {
         current += 5;
 
-        if (current <= 100) {
+        if (current < 95) {
           setProgress(current);
         }
       }, 200);
@@ -54,7 +51,6 @@ function Home() {
 
       const data = await response.json();
 
-      // COMPLETE PROGRESS
       clearInterval(interval);
 
       setProgress(100);
@@ -69,11 +65,10 @@ function Home() {
           });
         } else {
           toast.error(data.message || "Media not found");
+          setLoading(false);
+          setProgress(0);
         }
-
-        setLoading(false);
-        setProgress(0);
-      }, 500);
+      }, 1000);
 
     } catch (err) {
       console.log(err);
@@ -104,12 +99,10 @@ function Home() {
     document.body.removeChild(link);
   };
 
-  // PASTE FUNCTION
   const pasteUrl = async () => {
     try {
       const text = await navigator.clipboard.readText();
 
-      // URL validation
       const urlPattern =
         /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/\S*)?$/;
 
@@ -131,9 +124,26 @@ function Home() {
 
   return (
     <>
+      {loading && (
+        <div className="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center">
+
+          <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+
+          <h2 className="mt-6 text-2xl font-bold text-gray-800">
+            Processing...
+          </h2>
+
+          <p className="mt-2 text-gray-500">
+            {progress < 100
+              ? `Loading ${progress}%`
+              : "Preparing your download..."}
+          </p>
+
+        </div>
+      )}
+
       <div className="bg-[#ecf0f1] flex flex-col items-center pt-8 pb-20 px-4">
 
-        {/* TITLE */}
         <h1 className="text-4xl font-bold text-gray-800 text-center tracking-tight ">
           pintrestdownloader.net
         </h1>
@@ -143,18 +153,14 @@ function Home() {
           images, and GIFs online for free (without watermark).
         </p>
 
-        {/* INPUT BOX */}
         <div className="mt-8 w-full max-w-4xl flex flex-col sm:flex-row items-stretch sm:items-center bg-white rounded-md shadow-md overflow-hidden border border-gray-200">
 
-          {/* INPUT WRAPPER */}
           <div className="flex items-center w-full sm:flex-1 px-3 border-b sm:border-b-0 sm:border-r border-gray-200">
 
-            {/* ICON */}
             <div className="text-red-500">
               <FaLink />
             </div>
 
-            {/* INPUT */}
             <input
               type="text"
               placeholder="Paste Pinterest URL here..."
@@ -163,7 +169,6 @@ function Home() {
               className="flex-1 py-3 px-2 outline-none text-gray-700"
             />
 
-            {/* COPY BUTTON */}
             <button
               onClick={pasteUrl}
               className="text-gray-500 hover:text-red-500 transition"
@@ -173,20 +178,16 @@ function Home() {
 
           </div>
 
-          {/* DOWNLOAD BUTTON */}
           <button
             onClick={handleDownload}
             disabled={loading}
             className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 font-semibold transition disabled:opacity-50 w-full sm:w-auto"
           >
-            {loading ? `Loading ${progress}%` : "Download"}
+            {loading ? "Please wait..." : "Download"}
           </button>
 
         </div>
 
-        {/* RESULT SECTION */}
-
-        {/* VIDEO */}
         {video && (
           <div className="mt-10 w-full max-w-2xl text-center">
 
@@ -208,7 +209,6 @@ function Home() {
           </div>
         )}
 
-        {/* IMAGE */}
         {!video && image && (
           <div className="mt-10 w-full max-w-2xl text-center">
 
@@ -228,7 +228,6 @@ function Home() {
           </div>
         )}
 
-        {/* DISCOVER SECTION */}
         <div className="mt-10 w-full max-w-4xl bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
 
           <h2 className="px-6 py-4 text-lg font-semibold text-gray-800 border-b border-gray-200 bg-gray-50">
@@ -261,7 +260,6 @@ function Home() {
       <Section />
 
       {/* <Faq/> */}
-
     </>
   );
 }

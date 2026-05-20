@@ -8,7 +8,7 @@ export const homeController = (req, res) => {
 export const downloadController = async (req, res) => {
 
   
-
+let page;
   try {
 
     const url = req.query.url;
@@ -27,39 +27,36 @@ if (!browser) {
       "--no-sandbox",
       "--disable-setuid-sandbox",
       "--disable-dev-shm-usage",
+       "--single-process",
+    "--disable-gpu",
     ],
     executablePath: await chromium.executablePath(),
     headless: chromium.headless,
   });
 }
 
-const page = await browser.newPage();
+ page = await browser.newPage();
 
 await page.setUserAgent(
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
 );
 
-// FIX INTERCEPT
-if (!page._interceptEnabled) {
-  await page.setRequestInterception(true);
+await page.setRequestInterception(true);
 
-  page.on("request", (req) => {
-    const type = req.resourceType();
+page.on("request", (req) => {
+  const type = req.resourceType();
 
-    if (["image", "media", "font"].includes(type)) {
-      req.abort();
-    } else {
-      req.continue();
-    }
-  });
-
-  page._interceptEnabled = true;
-}
-    await page.goto(url, {
+  if (["image", "font", "stylesheet"].includes(type)) {
+    req.abort();
+  } else {
+    req.continue();
+  }
+});
+  await page.goto(url, {
       waitUntil: "domcontentloaded",
       timeout: 20000,
     });
-    await new Promise((r) => setTimeout(r, 800));
+    // await new Promise((r) => setTimeout(r, 800));
 
 
     await page.evaluate(() => {
@@ -98,7 +95,7 @@ if (!page._interceptEnabled) {
         : "";
     });
 
-    await page.close();
+   
    return res.json({
   success: true,
   image,
@@ -107,17 +104,20 @@ if (!page._interceptEnabled) {
 
   } catch (error) {
 
-    if (browser) {
-      await browser.close();
-    }
-
+   
     console.log(error);
 
     res.json({
       success: false,
       error: error.message,
     });
+  }finally {
+
+  if (page) {
+    await page.close();
   }
+
+}
 };
 
 export const proxyController = async (req, res) => {

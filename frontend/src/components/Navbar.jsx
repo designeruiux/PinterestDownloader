@@ -18,7 +18,7 @@ function Navbar() {
       {/* LEFT SIDE */}
       <div className="nav-left">
         <Link to="/" >
-        <div className="logo">KlickPin</div>
+        <div className="logo">pintrestdownloader.net</div>
       </Link>
         
 

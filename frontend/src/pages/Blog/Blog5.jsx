@@ -11,7 +11,7 @@ function Blog5() {
         </h1>
 
         <p className="text-sm text-gray-500 text-center mb-6">
-          By Klickpin Team • Category: Productivity • Read time: ~3 min
+          By pintrestdownloader.net Team • Category: Productivity • Read time: ~3 min
         </p>
 
         <p className="text-[16px] text-gray-700 leading-8 mb-6">

@@ -29,7 +29,7 @@ function Faq() {
               </div>
 
               <div className="bg-[#4b00d1] text-white p-5 text-[16px] leading-8 font-medium">
-                Yes, with KlickPin, you can easily download videos from
+                Yes, with pintrestdownloader.net, you can easily download videos from
                 Pinterest. Just copy the Pinterest video URL, paste it in the
                 form above, and click the Download button. The video will be
                 downloaded to your PC or mobile device.
@@ -119,7 +119,7 @@ function Faq() {
                 <div className="space-y-4 text-[16px] leading-8 font-medium">
 
                 <p>
-                    Yes, KlickPin supports downloading GIFs from Pinterest.
+                    Yes, pintrestdownloader.net supports downloading GIFs from Pinterest.
                 </p>
 
                 <p>
@@ -208,11 +208,11 @@ function Faq() {
 
             {/* FAQ ITEMS */}
             {[
-              "Does KlickPin work on mobile devices?",
+              "Does pintrestdownloader.net work on mobile devices?",
               "Can I download entire Pinterest boards?",
               "Can I download Pinterest artwork?",
-              "Does KlickPin store downloaded files?",
-              "Will there be a browser extension for KlickPin?"
+              "Does pintrestdownloader.net store downloaded files?",
+              "Will there be a browser extension for pintrestdownloader.net?"
             ].map((item, index) => (
               <div
                 key={index}

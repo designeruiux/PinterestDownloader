@@ -11,7 +11,7 @@ function Blog6() {
         </h1>
 
         <p className="text-sm text-gray-500 text-center mb-6">
-          By Klickpin Team • Category: Privacy • Read time: ~2 min
+          By pintrestdownloader.net Team • Category: Privacy • Read time: ~2 min
         </p>
 
         <p className="text-[16px] text-gray-700 leading-8 mb-6">
@@ -22,7 +22,7 @@ function Blog6() {
         </p>
 
         <p className="text-[16px] text-gray-700 leading-8 mb-6">
-          The good news is that Pinterest downloads through tools like Klickpin
+          The good news is that Pinterest downloads through tools like pintrestdownloader.net
           work normally in private mode. You can still browse content, copy
           links, and download videos just as you would in a regular browser
           window.

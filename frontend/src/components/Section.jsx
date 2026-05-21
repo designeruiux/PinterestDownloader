@@ -10,7 +10,7 @@ function Section() {
         {/* HEADER */}
         <div className="bg-gray-100 border-b border-gray-200 px-6 py-4">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-            How To Download Pinterest Videos using KlickPin?
+            How To Download Pinterest Videos using pintrestdownloader.net?
           </h2>
         </div>
 
@@ -18,7 +18,7 @@ function Section() {
 
           {/* DESCRIPTION */}
           <p className="text-[16px] md:text-base leading-7 text-gray-700">
-            Klickpin is the <b>Best Pinterest video downloader</b> online.
+            pintrestdownloader.net is the <b>Best Pinterest video downloader</b> online.
             The steps below provide quick info on how to
             <b> download Pinterest videos, images, and GIFs </b>
             from both mobile app and desktop versions 
@@ -35,7 +35,7 @@ function Section() {
             <ol className="mt-4 list-decimal pl-6 space-y-2 text-gray-700 text-[16px] leading-7">
               <li>Open the Pinterest App and select the video, image, or GIF you want to download.</li>
               <li>Tap on the ••• icon at the top right corner of the Pinterest app. If you are using the latest version, tap on the ••• icon at the bottom right corner of the app. After tapping the ••• icon, tap on the Copy Link option.</li>
-              <li>Paste the video URL in the Download Input Box on the KlickPin website, and tap on the Download button.</li>
+              <li>Paste the video URL in the Download Input Box on the pintrestdownloader.net website, and tap on the Download button.</li>
               <li>You will see a preview of your download file. Tap on the Download button just below it.</li>
               <li>The Pinterest video, image, or GIF will be downloaded to your device.</li>
             </ol>
@@ -134,7 +134,7 @@ function Section() {
       </div>
     </div>
 
- {/* KlickPin: Supported Video Quality & Formats section */}
+ {/* pintrestdownloader.net: Supported Video Quality & Formats section */}
 <div className="w-full flex justify-center px-4 mt-10">
 
   <div className="w-full max-w-5xl bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
@@ -142,7 +142,7 @@ function Section() {
     {/* HEADER */}
     <div className="bg-gray-100 border-b border-gray-200  px-6 py-4">
       <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-        KlickPin: Supported Video Quality & Formats
+        pintrestdownloader.net: Supported Video Quality & Formats
       </h2>
     </div>
 
@@ -150,7 +150,7 @@ function Section() {
 
       {/* DESCRIPTION */}
       <p className="text-[16px] leading-7 text-gray-700">
-        One of the best things about KlickPin is the choice of download quality.
+        One of the best things about pintrestdownloader.net is the choice of download quality.
         Whether you’re on mobile data or Wi-Fi, you can choose the right format and resolution.
       </p>
 
@@ -175,7 +175,7 @@ function Section() {
 
       {/* EXTRA PARAGRAPH */}
       <p className="text-[16px] leading-7 text-gray-700">
-        You can even use KlickPin as a Pinterest to MP4 or Pinterest to MP3 converter,
+        You can even use pintrestdownloader.net as a Pinterest to MP4 or Pinterest to MP3 converter,
         ideal for podcast-style learning or saving music clips.
       </p>
 
@@ -227,7 +227,7 @@ function Section() {
 </div>
 
 
-{/* Does KlickPin Work on Mobile? section */}
+{/* Does pintrestdownloader.net Work on Mobile? section */}
 <div className="w-full flex justify-center px-4 mt-10">
 
   <div className="w-full max-w-5xl bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
@@ -235,7 +235,7 @@ function Section() {
     {/* HEADER */}
     <div className="bg-gray-100 border-b border-gray-200 px-6 py-4">
       <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-        Does KlickPin Work on Mobile?
+        Does pintrestdownloader.net Work on Mobile?
       </h2>
     </div>
 
@@ -243,7 +243,7 @@ function Section() {
 
       {/* DESCRIPTION */}
       <p className="text-[16px] leading-7 text-gray-700">
-        Absolutely. KlickPin supports multiple devices so you can download Pinterest videos anytime, anywhere without restrictions.
+        Absolutely. pintrestdownloader.net supports multiple devices so you can download Pinterest videos anytime, anywhere without restrictions.
       </p>
 
       {/* DEVICE LIST */}
@@ -270,12 +270,12 @@ function Section() {
       {/* EXTRA TEXT */}
       <p className="text-[16px] leading-7 text-gray-700">
         Whether you're searching for a Pinterest video downloader app, a Chrome extension,
-        or just a fast website — KlickPin works from any browser.
+        or just a fast website — pintrestdownloader.net works from any browser.
       </p>
 
       {/* USER QUOTE BOX */}
       <div className="bg-gray-50 border border-gray-200 p-4 rounded-md italic text-gray-700 text-[15px] leading-6">
-        “I saved a Pinterest cooking video in HD using KlickPin, now I don’t need to open the app every time I want to watch it.” – Verified User
+        “I saved a Pinterest cooking video in HD using pintrestdownloader.net, now I don’t need to open the app every time I want to watch it.” – Verified User
       </div>
 
     </div>
@@ -299,7 +299,7 @@ function Section() {
 
       {/* DESCRIPTION */}
       <p className="text-[16px] leading-7 text-gray-700">
-        Aside from standard Pinterest videos, KlickPin also helps you download a wide range of content in just one click.
+        Aside from standard Pinterest videos, pintrestdownloader.net also helps you download a wide range of content in just one click.
       </p>
 
       {/* LIST */}
@@ -337,7 +337,7 @@ function Section() {
 </div>
 
 
-{/*  Is KlickPin Safe to Use? section */}
+{/*  Is pintrestdownloader.net Safe to Use? section */}
 <div className="w-full flex justify-center px-4 mt-10">
 
   <div className="w-full max-w-5xl bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
@@ -345,7 +345,7 @@ function Section() {
     {/* HEADER */}
     <div className="bg-gray-100 border-b border-gray-200 px-6 py-4">
       <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-        Is KlickPin Safe to Use?
+        Is pintrestdownloader.net Safe to Use?
       </h2>
     </div>
 
@@ -353,7 +353,7 @@ function Section() {
 
       {/* DESCRIPTION */}
       <p className="text-[16px] leading-7 text-gray-700">
-       Yes, KlickPin is completely safe.
+       Yes, pintrestdownloader.net is completely safe.
       </p>
 
       {/* LIST */}
@@ -414,7 +414,7 @@ function Section() {
        We believe in privacy-first tools that are easy to use and respectful of user data.
            </p>
         <p>
-    ✅ KlickPin.com is Verified Safe: Google Safe Browsing | Norton Safe Web | Sucuri Scanner
+    ✅ pintrestdownloader.net.com is Verified Safe: Google Safe Browsing | Norton Safe Web | Sucuri Scanner
            </p>
 
    
@@ -424,7 +424,7 @@ function Section() {
 </div>
 
 
-{/* Video Tutorial: How to Use Klickpin Pinterest Downloader?  section */}
+{/* Video Tutorial: How to Use pintrestdownloader.net Pinterest Downloader?  section */}
 <div className="w-full flex justify-center px-4 mt-10">
 
   <div className="w-full max-w-5xl bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
@@ -432,7 +432,7 @@ function Section() {
     {/* HEADER */}
     <div className="bg-gray-100 border-b border-gray-200 px-6 py-4">
       <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-      Video Tutorial: How to Use Klickpin Pinterest Downloader?
+      Video Tutorial: How to Use pintrestdownloader.net Pinterest Downloader?
       </h2>
     </div>
 
@@ -448,7 +448,7 @@ function Section() {
       <iframe
         className="w-full h-full"
         src="https://www.youtube.com/embed/mOsuZ0-H_xM"
-        title="KlickPin Demo Video"
+        title="pintrestdownloader.net Demo Video"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -460,7 +460,7 @@ function Section() {
 
   {/* DESCRIPTION */}
   <p className="text-[16px] text-center text-gray-700 leading-7">
-    Watch this quick demo to understand how KlickPin downloads Pinterest videos,
+    Watch this quick demo to understand how pintrestdownloader.net downloads Pinterest videos,
     images, and GIFs instantly in HD quality.
   </p>
 

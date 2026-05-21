@@ -10,7 +10,7 @@ function HowTo() {
         {/* HEADER */}
         <div className="bg-gray-100 border-b border-gray-200 px-6 py-4">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-            How To Download Pinterest Videos using KlickPin?
+            How To Download Pinterest Videos using pintrestdownloader.net?
           </h2>
         </div>
 
@@ -18,7 +18,7 @@ function HowTo() {
 
           {/* DESCRIPTION */}
           <p className="text-[16px] md:text-base leading-7 text-gray-700">
-            Klickpin is the <b>Best Pinterest video downloader</b> online.
+            pintrestdownloader.net is the <b>Best Pinterest video downloader</b> online.
             The steps below provide quick info on how to
             <b> download Pinterest videos, images, and GIFs </b>
             from both mobile app and desktop versions 
@@ -35,7 +35,7 @@ function HowTo() {
             <ol className="mt-4 list-decimal pl-6 space-y-2 text-gray-700 text-[16px] leading-7">
               <li>Open the Pinterest App and select the video, image, or GIF you want to download.</li>
               <li>Tap on the ••• icon at the top right corner of the Pinterest app. If you are using the latest version, tap on the ••• icon at the bottom right corner of the app. After tapping the ••• icon, tap on the Copy Link option.</li>
-              <li>Paste the video URL in the Download Input Box on the KlickPin website, and tap on the Download button.</li>
+              <li>Paste the video URL in the Download Input Box on the pintrestdownloader.net website, and tap on the Download button.</li>
               <li>You will see a preview of your download file. Tap on the Download button just below it.</li>
               <li>The Pinterest video, image, or GIF will be downloaded to your device.</li>
             </ol>

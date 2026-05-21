@@ -8,7 +8,7 @@ function ContactUs() {
 
         {/* TITLE */}
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">
-          Contact Us - KlickPin.com
+          Contact Us - pintrestdownloader.net
         </h1>
 
         {/* TEXT */}
@@ -20,10 +20,10 @@ function ContactUs() {
         {/* EMAIL BOX */}
         <div className=" rounded-lg p-4 inline-block">
           <a
-            href="mailto:admin@klickpin.com"
+            href="mailto:admin@pintrestdownloader.net"
             className=" font-semibold text-lg hover:underline"
           >
-            admin@klickpin.com
+            admin@pintrestdownloader.net
           </a>
         </div>
 

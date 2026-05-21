@@ -8,7 +8,7 @@ function SupportedUrls() {
 
           {/* TITLE */}
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 text-center">
-            KlickPin.com Supported URL&apos;s
+            pintrestdownloader.net Supported URL&apos;s
           </h1>
 
           {/* CONTENT */}

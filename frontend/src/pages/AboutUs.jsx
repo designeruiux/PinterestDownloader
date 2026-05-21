@@ -11,14 +11,14 @@ function AboutUs() {
 
   {/* TITLE */}
   <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 text-center">
-    About Us - Klickpin.com
+    About Us - pintrestdownloader.net
   </h1>
 
   {/* CONTENT */}
   <div className="text-[16px] text-gray-700 leading-relaxed text-left">
 
     <p className="mb-5">
-      Klickpin.com is a free website that helps users download their
+      pintrestdownloader.net is a free website that helps users download their
       favorite content from various platforms and save it for offline
       viewing by generating direct links to the content.
     </p>
@@ -26,14 +26,14 @@ function AboutUs() {
     <p className="mb-5">
       The content is hosted on the original platform's servers, not ours.
       We do not save content on our servers nor do we keep a history of
-      downloaded content. Using Klickpin.com is completely anonymous and
+      downloaded content. Using pintrestdownloader.net is completely anonymous and
       safe.
     </p>
 
     <p className="mb-5">
       We run Google Ads on our website to support our servers and keep
-      Klickpin.com running. If you want to support us, please disable your
-      AdBlocker while using Klickpin.com. We promise to only use safe and
+      pintrestdownloader.net running. If you want to support us, please disable your
+      AdBlocker while using pintrestdownloader.net We promise to only use safe and
       non-intrusive ads.
     </p>
 

@@ -19,7 +19,7 @@ function PrivacyPolicy() {
           </p>
 
           <p>
-            Klickpin.Com ("us", "we", or "our") operates the https://klickpin.com/
+            pintrestdownloader.net ("us", "we", or "our") operates the https://pintrestdownloader.net/
             website (hereinafter referred to as the "Service").
           </p>
 

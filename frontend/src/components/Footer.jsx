@@ -50,7 +50,7 @@ function Footer() {
 
         {/* DISCLAIMER */}
         <p className="text-center text-[15px] text-white mt-4 leading-5">
-          Klickpin.com is an independent platform and is not affiliated, associated,
+          pintrestdownloader.net is an independent platform and is not affiliated, associated,
           authorized, endorsed by, or in any way officially connected with Pinterest.com.
         </p>
 

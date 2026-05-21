@@ -1,93 +1,16 @@
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
-
 let browser;
-const pagePool = [];
-const cache = new Map();
-
-const MAX_PAGES = 3;
-
-/* =========================
-   BROWSER INIT (WARM START)
-========================= */
-export const initBrowser = async () => {
-  if (!browser) {
-    browser = await puppeteer.launch({
-      args: [
-        ...chromium.args,
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--single-process",
-      ],
-      executablePath: await chromium.executablePath(),
-      headless: chromium.headless,
-    });
-
-    console.log("🚀 Browser initialized");
-  }
-
-  return browser;
-};
-
-/* =========================
-   PAGE POOL
-========================= */
-const getPage = async () => {
-  const browserInstance = await initBrowser();
-
-  if (pagePool.length > 0) {
-    return pagePool.pop();
-  }
-
-  const page = await browserInstance.newPage();
-
-  // Block heavy resources (speed boost)
-  await page.setRequestInterception(true);
-
-  page.on("request", (req) => {
-    const type = req.resourceType();
-
-    if (["image", "font", "stylesheet"].includes(type)) {
-      req.abort();
-    } else {
-      req.continue();
-    }
-  });
-
-  await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-  );
-
-  return page;
-};
-
-const releasePage = (page) => {
-  try {
-    if (pagePool.length < MAX_PAGES) {
-      pagePool.push(page);
-    } else {
-      page.close();
-    }
-  } catch (err) {
-    console.log("Page release error:", err.message);
-  }
-};
-
-/* =========================
-   HOME CONTROLLER
-========================= */
 export const homeController = (req, res) => {
   res.send("Pinterest Downloader API Running...");
 };
 
-/* =========================
-   DOWNLOAD CONTROLLER
-========================= */
 export const downloadController = async (req, res) => {
-  let page;
 
+  
+let page;
   try {
+
     const url = req.query.url;
 
     if (!url) {
@@ -97,90 +20,110 @@ export const downloadController = async (req, res) => {
       });
     }
 
-    /* =========================
-       CACHE CHECK (FAST PATH)
-    ========================= */
-    if (cache.has(url)) {
-      return res.json({
-        success: true,
-        cached: true,
-        ...cache.get(url),
-      });
-    }
+if (!browser) {
+  browser = await puppeteer.launch({
+    args: [
+      ...chromium.args,
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+       "--single-process",
+    "--disable-gpu",
+    ],
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
+  });
+}
 
-    /* =========================
-       GET PAGE
-    ========================= */
-    page = await getPage();
+ page = await browser.newPage();
 
-    /* =========================
-       FAST NAVIGATION
-    ========================= */
-    await page.goto(url, {
+await page.setUserAgent(
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+);
+
+await page.setRequestInterception(true);
+
+page.on("request", (req) => {
+  const type = req.resourceType();
+
+  if (["font", "stylesheet"].includes(type)) {
+    req.abort();
+  } else {
+    req.continue();
+  }
+});
+  await page.goto(url, {
       waitUntil: "domcontentloaded",
-      timeout: 15000,
+      timeout: 20000,
+    });
+    // await new Promise((r) => setTimeout(r, 800));
+
+
+    await page.evaluate(() => {
+      window.scrollBy(0, window.innerHeight);
     });
 
-    /* =========================
-       EXTRACT HTML
-    ========================= */
+
+
     const html = await page.content();
 
-    /* =========================
-       VIDEO EXTRACTION
-    ========================= */
     let videoUrl = "";
 
     const matches =
-      html.match(/https:\/\/v1\.pinimg\.com\/videos\/[^"]+\.mp4/) ||
-      html.match(/https:\/\/v\.pinimg\.com\/[^"]+\.mp4/);
+      html.match(
+        /https:\/\/v1\.pinimg\.com\/videos\/[^"]+\.mp4/g
+      ) ||
+      html.match(
+        /https:\/\/v\.pinimg\.com\/[^"]+\.mp4/g
+      );
 
     if (matches && matches.length > 0) {
-      videoUrl = matches[0].split('"')[0];
+
+      videoUrl = matches[0];
+
+      videoUrl = videoUrl.split('"')[0];
     }
 
-    /* =========================
-       IMAGE EXTRACTION
-    ========================= */
     const image = await page.evaluate(() => {
-      const ogImage = document.querySelector('meta[property="og:image"]');
-      return ogImage ? ogImage.content : "";
+
+      const ogImage = document.querySelector(
+        'meta[property="og:image"]'
+      );
+
+      return ogImage
+        ? ogImage.content
+        : "";
     });
 
-    const result = {
-      image,
-      video: videoUrl,
-    };
+   
+   return res.json({
+  success: true,
+  image,
+  video: videoUrl,
+});
 
-    /* =========================
-       SAVE CACHE
-    ========================= */
-    cache.set(url, result);
-
-    return res.json({
-      success: true,
-      cached: false,
-      ...result,
-    });
   } catch (error) {
-    console.log("Error:", error.message);
 
-    return res.json({
+   
+    console.log(error);
+
+    res.json({
       success: false,
       error: error.message,
     });
-  } finally {
-    if (page) {
-      releasePage(page);
-    }
+  }finally {
+
+  if (page) {
+    await page.close();
   }
+
+}
 };
 
-/* =========================
-   PROXY CONTROLLER
-========================= */
 export const proxyController = async (req, res) => {
+
   try {
+
     const url = req.query.url;
 
     if (!url) {
@@ -189,8 +132,8 @@ export const proxyController = async (req, res) => {
 
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "Mozilla/5.0",
-      },
+        "User-Agent": "Mozilla/5.0"
+      }
     });
 
     if (!response.ok) {
@@ -203,9 +146,13 @@ export const proxyController = async (req, res) => {
 
     let extension = "file";
 
-    if (contentType.includes("mp4")) extension = "mp4";
-    else if (contentType.includes("jpeg")) extension = "jpg";
-    else if (contentType.includes("png")) extension = "png";
+    if (contentType.includes("mp4")) {
+      extension = "mp4";
+    } else if (contentType.includes("jpeg")) {
+      extension = "jpg";
+    } else if (contentType.includes("png")) {
+      extension = "png";
+    }
 
     res.setHeader(
       "Content-Disposition",
@@ -216,9 +163,12 @@ export const proxyController = async (req, res) => {
 
     const buffer = await response.arrayBuffer();
 
-    return res.send(Buffer.from(buffer));
+    res.send(Buffer.from(buffer));
+
   } catch (err) {
+
     console.log(err);
-    return res.status(500).send("Download failed");
+
+    res.status(500).send("Download failed");
   }
 };
